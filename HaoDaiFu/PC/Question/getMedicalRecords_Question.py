@@ -1,20 +1,21 @@
 # ===========================================================================================================
 # Author    ：LuShangWu
 # Date      ：2024-10-20
-# Version   ：1
-# Description：用于爬取hao网站的问诊记录的链接并保存到本地
+# Version   ：1.0
+# Description：用于爬取hao网站下指定科室的问诊记录的链接并保存到本地，用于提供后续爬取单条数据的URL
 # Copyright  ：LuShangWu
 # License   ：MIT
 # ===========================================================================================================
 import requests
 from bs4 import BeautifulSoup
-from getDetailRecord import getDetailRecord
+from HaoDaiFu.PC.Question.getDetailRecord_Question import getDetailRecord_Question
 import random
 import time
 
 
-def getMedicalRecords(url,infoIndex,cursor,connetion):
-    print("【Get Medical Records】"+url)
+def getMedicalRecords_Question(url, infoIndex, cursor, connetion):
+    minPage = 1
+    maxPage = 10
     headers = {
         "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
         "accept-encoding": "gzip, deflate, br, zstd",
@@ -33,17 +34,23 @@ def getMedicalRecords(url,infoIndex,cursor,connetion):
         "upgrade-insecure-requests": "1",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0"
     }
-    response = requests.get(url,headers=headers)
-    html = response.text
-    soup = BeautifulSoup(html, 'html.parser')  # 用BeautifulSoup解析HTML代码
+    for i in range(minPage,maxPage+1):
+        if(i>0):
+            tempUrl = url+"?p="+str(i);
+        else:
+            tempUrl = url
+        print("【Get Medical Records】"+tempUrl)
+        response = requests.get(tempUrl,headers=headers)
+        html = response.text
+        soup = BeautifulSoup(html, 'html.parser')  # 用BeautifulSoup解析HTML代码
 
-    # 存储问诊数据的链接
-    all_links = []
-    # 找到所有的问诊记录
-    records = soup.find_all('a', attrs={'class':'fl'})
-    for record in records:
-        all_links.append(record['href'])
-        # time.sleep(5+random.randint(0,60))
-        getDetailRecord(record['href'],infoIndex,cursor,connetion)
-        infoIndex+=1
-        time.sleep(5+random.randint(1,10))
+        # 存储问诊数据的链接
+        all_links = []
+        # 找到所有的问诊记录
+        records = soup.find_all('a', attrs={'class':'fl'})
+        for record in records:
+            all_links.append(record['href'])
+            # time.sleep(5+random.randint(0,60))
+            getDetailRecord_Question(record['href'], infoIndex, cursor, connetion)
+            infoIndex+=1
+            time.sleep(random.randint(1,5))

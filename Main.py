@@ -6,7 +6,8 @@
 # Copyright  ：LuShangWu
 # License   ：MIT
 # ===========================================================================================================
-from getDepartment import getDepartment
+from HaoDaiFu.PC.Question.getDepartment_Question import getDepartment_Question
+from HaoDaiFu.PC.Info.getDepartment_Info import getDepartment_Info
 import pymysql
 
 db_config = {
@@ -22,8 +23,10 @@ if __name__ == '__main__':
     connection = pymysql.connect(**db_config)
     cursor = connection.cursor()
     infoIndex = 1
-    # 爬取
-    department = getDepartment(infoIndex,cursor,connection)
+    # 爬取问诊信息
+    # getDepartment_Question(infoIndex,cursor,connection)
+    # 爬取医生信息
+    getDepartment_Info(cursor,connection)
     # 关闭连接
     cursor.close()
     connection.close()

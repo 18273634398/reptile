@@ -1,18 +1,18 @@
 # ===========================================================================================================
 # Author    ：LuShangWu
 # Date      ：2024-10-20
-# Version   ：1
-# Description：用于爬取hao网站科室信息
+# Version   ：1.0
+# Description：用于爬取hao网站问诊页的科室信息数据
 # Copyright  ：LuShangWu
 # License   ：MIT
 # ===========================================================================================================
 
 import requests
 from bs4 import BeautifulSoup
-from getMedicalRecords import getMedicalRecords
+from HaoDaiFu.PC.Question.getMedicalRecords_Question import getMedicalRecords_Question
 
 
-def getDepartment(infoIndex,cursor,connection):
+def getDepartment_Question(infoIndex,cursor,connection):
     url = "https://www.haodf.com/bingcheng/list.html"
     headers = {
         "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
@@ -74,5 +74,5 @@ def getDepartment(infoIndex,cursor,connection):
                 # 打印科室信息
                 print(f"{index}. {name}, 链接: {link}")
                 # 爬取当前科室的所有问诊数据记录列表
-                getMedicalRecords(link,infoIndex,cursor,connection)
+                getMedicalRecords_Question(link, infoIndex, cursor, connection)
 

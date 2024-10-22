@@ -10,7 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def getDetailRecord(url,infoIndex,cursor,connection):
+def getDetailRecord_Question(url, infoIndex, cursor, connection):
     print("[getting detail record]" + url)
     headers = {
         "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
@@ -36,6 +36,7 @@ def getDetailRecord(url,infoIndex,cursor,connection):
 
     # 解构医生数据
     try:
+        print(f"INFO[{infoIndex}]")
         soup = BeautifulSoup(html, 'html.parser')
         doctorName = soup.find('span', {'class':'info-text-name'}).text
         doctorGrade = soup.find('span', {'class':'info-text-grade'}).text
@@ -74,7 +75,6 @@ def getDetailRecord(url,infoIndex,cursor,connection):
         infoSum =[]
 
         # 获取问诊数据的患者文本信息
-        print(f"INFO[{infoIndex}]")
         for i in range(len(title_list_index)-1):
             tempInfo = medicalInfo[title_list_index[i]:title_list_index[i+1]]
             soup = BeautifulSoup(tempInfo, 'html.parser')
@@ -169,4 +169,4 @@ def getDetailRecord(url,infoIndex,cursor,connection):
 
 
 if __name__ == '__main__':
-    getDetailRecord('https://www.haodf.com/bingcheng/8904512091.html',0,None,None)
+    getDetailRecord_Question('https://www.haodf.com/bingcheng/8904512091.html', 0, None, None)
