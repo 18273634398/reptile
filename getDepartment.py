@@ -1,7 +1,7 @@
 # ===========================================================================================================
 # Author    ：LuShangWu
 # Date      ：2024-10-20
-# Version   ：1.0
+# Version   ：1
 # Description：用于爬取hao网站科室信息
 # Copyright  ：LuShangWu
 # License   ：MIT

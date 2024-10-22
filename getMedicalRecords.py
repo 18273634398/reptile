@@ -1,7 +1,7 @@
 # ===========================================================================================================
 # Author    ：LuShangWu
 # Date      ：2024-10-20
-# Version   ：1.0
+# Version   ：1
 # Description：用于爬取hao网站的问诊记录的链接并保存到本地
 # Copyright  ：LuShangWu
 # License   ：MIT
