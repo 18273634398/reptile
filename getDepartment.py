@@ -73,5 +73,6 @@ def getDepartment(infoIndex,cursor,connection):
                 all_departments[name] = link
                 # 打印科室信息
                 print(f"{index}. {name}, 链接: {link}")
+                # 爬取当前科室的所有问诊数据记录列表
                 getMedicalRecords(link,infoIndex,cursor,connection)
 

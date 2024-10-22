@@ -22,6 +22,7 @@ if __name__ == '__main__':
     connection = pymysql.connect(**db_config)
     cursor = connection.cursor()
     infoIndex = 1
+    # 爬取
     department = getDepartment(infoIndex,cursor,connection)
     # 关闭连接
     cursor.close()

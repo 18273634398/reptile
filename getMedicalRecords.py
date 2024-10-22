@@ -37,6 +37,7 @@ def getMedicalRecords(url,infoIndex,cursor,connetion):
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')  # 用BeautifulSoup解析HTML代码
 
+    # 存储问诊数据的链接
     all_links = []
     # 找到所有的问诊记录
     records = soup.find_all('a', attrs={'class':'fl'})

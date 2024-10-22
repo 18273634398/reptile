@@ -33,6 +33,7 @@ def getDetailRecord(url,infoIndex,cursor,connection):
     response = requests.get(url,headers=headers)
     html = response.text
     # print(html)
+
     # 解构医生数据
     try:
         soup = BeautifulSoup(html, 'html.parser')
